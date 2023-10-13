@@ -1,23 +1,23 @@
 #include <Arduino.h>
 
-#define red 3
-#define yellow 1
-#define green 2
+#define led 3
+#define PIR 2
+
+int val;
 
 void setup() {
-  pinMode(red, OUTPUT);
-  pinMode(yellow, OUTPUT);
-  pinMode(green, OUTPUT);
+  pinMode(led, OUTPUT);
+  pinMode(PIR, INPUT);
+  Serial.begin(9600);
 }
 
 void loop() {
-  digitalWrite(green, HIGH);
-  delay(2000);
-  digitalWrite(green, LOW);
-  digitalWrite(yellow, HIGH);
-  delay(1000);
-  digitalWrite(yellow, LOW);
-  digitalWrite(red, HIGH);
-  delay(2000);
-  digitalWrite(red, LOW);
+  val = digitalRead(PIR);
+  if(val == HIGH){
+    digitalWrite(led, HIGH);
+  }
+  else{
+    digitalWrite(led, LOW);
+  }
+  Serial.println(val);
 }
